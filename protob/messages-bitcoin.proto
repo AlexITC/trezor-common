@@ -95,6 +95,11 @@ message SignMessage {
     optional InputScriptType script_type = 4 [default=SPENDADDRESS];    // used to distinguish between various address formats (non-segwit, segwit, etc.)
 }
 
+message SignTxInput {
+    required bytes txid = 1;
+    required uint32 index = 2;
+}
+
 /**
  * Response: Signed message
  * @end
