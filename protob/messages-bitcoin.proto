@@ -95,9 +95,17 @@ message SignMessage {
     optional InputScriptType script_type = 4 [default=SPENDADDRESS];    // used to distinguish between various address formats (non-segwit, segwit, etc.)
 }
 
+/**
+ * Request: Ask device to sign message
+ * @start
+ * @next MessageSignature
+ * @next Failure
+ */
 message SignTxInput {
-    required bytes txid = 1;
-    required uint32 index = 2;
+    repeated uint32 address_n = 1;                                      // BIP-32 path to derive the key from master node
+    required bytes tx_input = 2;                                        // transaction input to be signed
+    optional string coin_name = 3 [default='Bitcoin'];                  // coin to use for signing
+    optional InputScriptType script_type = 4 [default=SPENDADDRESS];    // used to distinguish between various address formats (non-segwit, segwit, etc.)
 }
 
 /**
